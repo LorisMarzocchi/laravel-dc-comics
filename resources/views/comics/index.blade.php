@@ -1,10 +1,4 @@
-{{-- @php
-foreach ($comics as $comic) {
-    # code...
-    $orgDate = 'comic->sale_date';
-    $newDate = date("d-m-Y", strtotime($orgDate));
-}
-@endphp --}}
+
 @extends('layouts.base')
 
 @section('contents')
@@ -38,5 +32,6 @@ foreach ($comics as $comic) {
         @endforeach
     </tbody>
   </table>
+  {{ $comics->links() }}
 
   @endsection
