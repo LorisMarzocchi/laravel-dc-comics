@@ -15,7 +15,7 @@ class ComicController extends Controller
      */
     public function index()
     {
-        $comics = Comic::paginate(5);// SELECT * FROM `comics`
+        $comics = Comic::paginate(6);// SELECT * FROM `comics`
         // $comics = Comic::paginate(5);
         // dd($comics);
 
@@ -29,7 +29,7 @@ class ComicController extends Controller
      */
     public function create()
     {
-        //
+        return view('comics.create');
     }
 
     /**
