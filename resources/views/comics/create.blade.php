@@ -32,12 +32,12 @@
         <div class="mb-3">
             <label for="start" >Sale date:</label>
 
-            <input type="date" id="start" name="Sale_date" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+            <input type="date" id="start" name="sale_date" value="2018-07-22" min="2018-01-01" max="2018-12-31">
         </div>
 
         <div class="mb-3">
             <label for="cottura" class="form-label">Type</label>
-            <input type="text" class="form-control" id="cottura">
+            <input type="text" class="form-control" id="cottura" name="type">
         </div>
 
 
