@@ -32,7 +32,7 @@
         <div class="mb-3">
             <label for="start" >Sale date:</label>
 
-            <input type="date" id="start" name="sale_date" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+            <input type="date" id="start" name="sale_date" value="2023-01-01" min="2023-01-01" max="2025-12-31">
         </div>
 
         <div class="mb-3">
