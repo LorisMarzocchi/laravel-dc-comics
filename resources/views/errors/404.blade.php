@@ -1,5 +1,4 @@
-@extends('errors::minimal')
-
-@section('title', __('Not Found'))
-@section('code', '404')
-@section('message', __('Pagina non trovata'))
+@extends('layouts.base')
+@section('contents')
+    <h1>404 - Pagina non trovata</h1>
+@endsection
