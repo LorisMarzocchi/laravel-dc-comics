@@ -10,6 +10,9 @@
         {{-- <img src="{{ Vite::asset('resources/img/picsum30.jpg') }}" alt=""> --}}
         <div class="container">
             <main>
+                <a class="btn btn-primary" href="{{ route('home') }}">Home</a>
+                <a class="btn btn-primary m-3" href="{{ route('comics.index') }}">Comics List</a>
+
                 @yield('contents')
             </main>
         </div>

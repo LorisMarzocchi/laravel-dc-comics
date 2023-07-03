@@ -23,3 +23,4 @@ class ComicsTableSeeder extends Seeder
         }
     }
 }
+// config('comics')

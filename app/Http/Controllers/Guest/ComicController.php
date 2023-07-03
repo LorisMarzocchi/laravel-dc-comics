@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class ComicController extends Controller
 {
+    private $validation = [
+        'title' => 'required|string|max:150',
+        'description' => 'required|string|max:2000',
+        'thumb' => 'required|url|max:350',
+        'price' => 'required|string|max:20',
+        'series' => 'required|string|max:150',
+        'sale_date' => 'required|date',
+        'type' => 'required|string|max:50',
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -15,11 +24,15 @@ class ComicController extends Controller
      */
     public function index()
     {
-        $comics = Comic::paginate(6);// SELECT * FROM `comics`
-        // $comics = Comic::paginate(5);
+        $comics = Comic::paginate(6);
+        // $comics = Comic::all();  // SELECT * FROM `comics`
         // dd($comics);
 
-        return view('comics.index', compact('comics'));
+        return view('comics.index', compact('comics'));//necessaria la variabile
+        // return view('comics.index',[
+        //     'pasta'=> $pasta,
+        //     'pasta'=> Comic::paginate(6),
+        // ]);
     }
 
     /**
@@ -42,17 +55,9 @@ class ComicController extends Controller
     {
         //validare i dati
 
-        $request->validate([
-            'title' => 'required|string|max:150',
-            'description' => 'required|string|max:2000',
-            'thumb' => 'required|url|max:200',
-            'price' => 'required|string|max:20',
-            'series' => 'required|string|max:150',
-            'sale_date' => 'required|date',
-            'type' => 'required|string|max:50',
-        ]);
+        $request->validate($this->validation);
 
-        $data = $request->all();
+        $data = $request->all(); //estrae i dati inseriti nel form e li inserisce in un array associativo
 
         // salvare i dati nel database
 
@@ -91,7 +96,8 @@ class ComicController extends Controller
      */
     public function edit(Comic $comic)
     {
-        //
+
+        return view('comics.edit', compact('comic'));
     }
 
     /**
@@ -103,7 +109,28 @@ class ComicController extends Controller
      */
     public function update(Request $request, Comic $comic)
     {
-        //
+        //validare dati
+        // $request-validate($this->validation);
+        $request->validate($this->validation);
+
+        $data = $request->all();
+
+
+        //aggiornare i dati nel database
+
+        $comic->title = $data['title'];
+        $comic->description = $data['description'];
+        $comic->thumb = $data['thumb'];
+        $comic->price = $data['price'];
+        $comic->series = $data['series'];
+        $comic->sale_date = $data['sale_date'];
+        $comic->type = $data['type'];
+
+        $comic->update();
+
+        return to_route('comics.show', ['comic' => $comic->id]);
+        // return redirect()->route('comics.show', ['comic' => $comic->id]); fanno la stessa cosa
+
     }
 
     /**
@@ -114,6 +141,7 @@ class ComicController extends Controller
      */
     public function destroy(Comic $comic)
     {
-        //
+        $comic->delete();
+        return to_route('comics.index')->with('delete_succes', $comic);
     }
 }
