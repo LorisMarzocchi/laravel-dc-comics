@@ -27,11 +27,8 @@
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <textarea class="form-control @error('description') is-invalid @enderror" id="description" rows="3"
-                name="description" value="{{ old('description') }}">
-@error('description')
-{{ $message }}
-@enderror
-</textarea>
+                name="description" value="{{ old('description') }}">@error('description'){{ $message }}@enderror
+            </textarea>
 
         </div>
 

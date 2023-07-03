@@ -1,14 +1,27 @@
 @extends('layouts.base')
 
 @section('contents')
-
-<h1 class="text-center text-danger p-3">Comics List:</h1>
-<a class="btn btn-primary m-3" href="{{ route('comics.create') }}">Add New Comic</a>
-    {{-- @if (session('delete_success'))
+    <h1 class="text-center text-danger p-3">Comics List:</h1>
+    @if (session('delete_success'))
+        @php $comic = session('delete_success') @endphp
         <div class="alert alert-danger">
-            {{ session('delete_success') }}
+            The comic "{{ $comic->title }}" has been cancelled
+            <form action="{{ route('comics.restore', ['comic' => $comic]) }}" method="POST" class="d-inline-block">
+                @csrf
+                <button class="btn btn-warning">Ripristina</button>
+            </form>
+        </div>
+    @endif
+
+    {{-- @if (session('restore_success'))
+        @php $comic = session('restore_success') @endphp
+        <div class="alert alert-success">
+            The comic "{{ $comic->title }}" has been restored
         </div>
     @endif --}}
+    <a class="btn btn-primary m-3" href="{{ route('comics.create') }}">Add New Comic</a>
+
+
 
     <table class="table">
         <thead>
@@ -30,15 +43,12 @@
                     <td>
                         <a class="btn btn-primary" href="{{ route('comics.show', ['comic' => $comic->id]) }}">View</a>
                         <a class="btn btn-warning" href="{{ route('comics.edit', ['comic' => $comic->id]) }}">Edit</a>
-                        <form
-                            class=" d-inline-block "
-                            action="{{ route('comics.destroy', ['comic' => $comic->id]) }}"
+                        <form class=" d-inline-block " action="{{ route('comics.destroy', ['comic' => $comic->id]) }}"
                             method="POST">
                             @csrf
                             @method('delete')
                             <button class="btn btn-danger">Delete</button>
                         </form>
-                        {{-- <a class="btn btn-danger" href="{{ route('comics.destroy', ['comic' => $comic->id]) }}">Delete</a> --}}
                     </td>
                 </tr>
             @endforeach

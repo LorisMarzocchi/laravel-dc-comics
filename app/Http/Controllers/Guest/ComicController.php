@@ -28,7 +28,7 @@ class ComicController extends Controller
         // $comics = Comic::all();  // SELECT * FROM `comics`
         // dd($comics);
 
-        return view('comics.index', compact('comics'));//necessaria la variabile
+        return view('comics.index', compact('comics')); //necessaria la variabile
         // return view('comics.index',[
         //     'pasta'=> $pasta,
         //     'pasta'=> Comic::paginate(6),
@@ -74,7 +74,6 @@ class ComicController extends Controller
         $newComic->save();
 
         return redirect()->route('comics.show', ['comic' => $newComic->id]);
-
     }
 
     /**
@@ -143,5 +142,10 @@ class ComicController extends Controller
     {
         $comic->delete();
         return to_route('comics.index')->with('delete_succes', $comic);
+        // return 'delete';
+    }
+
+    public function restore()
+    {
     }
 }
