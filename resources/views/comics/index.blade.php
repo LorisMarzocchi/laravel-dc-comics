@@ -5,21 +5,22 @@
     @if (session('delete_success'))
         @php $comic = session('delete_success') @endphp
         <div class="alert alert-danger">
-            The comic "{{ $comic->title }}" has been cancelled
-            <form action="{{ route('comics.restore', ['comic' => $comic]) }}" method="POST" class="d-inline-block">
+            Comic '{{ $comic->title }}' has been cancelled
+            <form action="{{ route('comics.restore', ['comic' => $comic]) }}" method="POST">
                 @csrf
-                <button class="btn btn-warning">Ripristina</button>
+                <button class="btn btn-warning">Restore</button>
             </form>
         </div>
     @endif
 
-    {{-- @if (session('restore_success'))
+    @if (session('restore_success'))
         @php $comic = session('restore_success') @endphp
         <div class="alert alert-success">
-            The comic "{{ $comic->title }}" has been restored
+            Comic '{{ $comic->title }}' has been restored
         </div>
-    @endif --}}
+    @endif
     <a class="btn btn-primary m-3" href="{{ route('comics.create') }}">Add New Comic</a>
+    <a class="btn btn-primary m-3" href="{{ route('comics.trashed') }}">Trash</a>
 
 
 
